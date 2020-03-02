@@ -1,36 +1,20 @@
+const loadPlaces = function (coords) {
+    // COMMENT FOLLOWING LINE IF YOU WANT TO USE STATIC DATA AND ADD COORDINATES IN THE FOLLOWING 'PLACES' ARRAY
+    const method = 'api';
 
-// getting places from REST APIs
-function loadPlaceFromAPIs(position) {
-    const params = {
-        radius: 300,    // search places not farther than this value (in meters)
-        clientId: 'JCFMN5WPOPIAQH5X43WXTNX4BOAZD1NWQVLV445FSRV2VDFB',
-        clientSecret: '3Y1U5G4BSZ31VR2NJZNXT4EIFEANFBRULOEEUQNBQR3NM4MJ',
-        version: '20300101',    // foursquare versioning, required but unuseful for this demo
-    };
+    const PLACES = [
+        {
+            name: "building",
+            location: {
+                lat: 37.38288501010574 , // add here latitude if using static data
+                lng: 27.1220399985857, // add here longitude if using static data
+            }
+        },
+    ];
 
-    // CORS Proxy to avoid CORS problems
-    const corsProxy = 'https://cors-anywhere.herokuapp.com/';
-
-    // Foursquare API
-    const endpoint = `${corsProxy}https://api.foursquare.com/v2/venues/search?intent=checkin
-        &ll=${position.latitude},${position.longitude}
-        &radius=${params.radius}
-        &client_id=${params.clientId}
-        &client_secret=${params.clientSecret}
-        &limit=15
-        &v=${params.version}`;
-    return fetch(endpoint)
-        .then((res) => {
-            return res.json()
-                .then((resp) => {
-                    return resp.response.venues;
-                })
-        })
-        .catch((err) => {
-            console.error('Error with places API', err);
-        })
-};
-
+    if (method === 'api') {
+        return loadPlaceFromAPIs(coords);
+    }
 
 window.onload = () => {
     const scene = document.querySelector('a-scene');
