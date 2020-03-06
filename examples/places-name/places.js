@@ -7,7 +7,7 @@ const loadPlaces = function (coords) {
             name: "building",
             location: {
                 lat: 37.38288501010574 , // add here latitude if using static data
-                lng: 27.1220399985857, // add here longitude if using static data
+                lng: 127.1220399985857, // add here longitude if using static data
             }
         },
     ];
